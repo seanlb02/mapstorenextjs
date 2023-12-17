@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@turf/centroid": "^6.5.0",
+    "geojson-bbox": "^0.0.1",
+    "next": "14.0.2",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.2"
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
