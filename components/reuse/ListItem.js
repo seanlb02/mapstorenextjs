@@ -8,8 +8,14 @@ import son from "../test.json"
 import { Sidebar_props } from "/context/context"
 
 
-export default function ListItem({filename, preview, geometry, topology, date, error, duplicates, projection}) {
 
+export default function ListItem({filename, preview, geometry, topology, date, error, duplicates, projection, download}) {
+
+
+    const Preview = function(){
+        setSidebarprops({previewBool:true, boundbox:[[bbox(son)[1],bbox(son)[0]], [bbox(son)[3], bbox(son)[2]]]})
+        
+    }
     const {sidebarprops, setSidebarprops} = useContext(Sidebar_props)
     return (
         <div className={styles.itemContainer}>
@@ -27,7 +33,7 @@ export default function ListItem({filename, preview, geometry, topology, date, e
                     <div id="proj" className={styles.icon}>
                         {projection}
                     </div>
-                    <div id="Preview" className={styles.icon} onClick={() => setSidebarprops([[bbox(son)[1],bbox(son)[0]], [bbox(son)[3], bbox(son)[2]]])}>
+                    <div id="Preview" className={styles.icon} onClick={() => Preview()}>
                         {preview}
                     </div>
                     <div id="Error" className="text-xs text-red-500">
@@ -35,6 +41,9 @@ export default function ListItem({filename, preview, geometry, topology, date, e
                     </div>
                     <div id="Error" className="text-xs">
                         {duplicates}
+                    </div>
+                    <div id="Download" className="text-xs text-black ml-auto">
+                        <Link href='/dl'>{download}</Link>
                     </div>
                 </section>
                 

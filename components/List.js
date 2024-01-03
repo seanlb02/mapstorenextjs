@@ -9,9 +9,9 @@ const list = Array.from(Array(40).keys())
 export default function List() {
     return (
         <div className={styles.pageContainer}>
-            <ListItem filename="File name here" date="10/2/23" geometry="Point" preview="Preview" error="" duplicates="Duplicates" projection="GDA2020"/>
-            <ListItem filename="File name here" date="10/5/23" geometry="Line" preview="Preview" error="Error" duplicates="" projection="GDA2020"/>
-           {list.map((el) => <ListItem filename="File name here" date="10/4/23" geometry="Polygon" preview="Preview" projection="GDA2020"/>)}
+            <ListItem filename="File name here" date="10/2/23" geometry="Point" preview="Preview" error="" duplicates="Duplicate" projection="GDA2020" download="Download"/>
+            <ListItem filename="File name here" date="10/5/23" geometry="Line" preview="Preview" error="Error" duplicates="" projection="GDA2020" download="Download"/>
+           {list.map((el) => <ListItem filename="File name here" date="10/4/23" geometry="Polygon" preview="Preview" projection="GDA2020" download="Download"/>)}
         </div>
     )
 }

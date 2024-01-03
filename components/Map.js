@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import bbox from 'geojson-bbox'
 import Recenter from './Recenter'
 
@@ -9,26 +9,27 @@ import dynamic from 'next/dynamic'
 
 import son from "./test.json"
 
+import { Sidebar_props } from "/context/context"
 
 
 export default function Map({center}) {
 
   useEffect(() => {
-  console.log(bbox(son))
-  console.log([[bbox(son)[1], bbox(son)[0]], [bbox(son)[3], bbox(son)[2]]])
- 
+    setSidebarprops({previewBool:false})
 }, [])
 
   const [extent, setExtent] = useState([
     [50.505, -29.09],
     [52.505, 29.09]
   ])
-  const [bool, setBool] = useState(false)
+
+  const {sidebarprops, setSidebarprops} = useContext(Sidebar_props)
+
 
     return (
-<div className='flex h-[75vh] w-[50vw] border-t '>
-  {bool ? <><div onClick={() => setExtent([[bbox(son)[1],bbox(son)[0]], [bbox(son)[3], bbox(son)[2]]])}>hey</div><MapContainer className='flex h-full w-full' bounds={extent} zoom={13} scrollWheelZoom={true}>
-  <Recenter bounds={extent}/>
+  <div className='flex h-[76vh] w-[50vw] border-t '>
+    {sidebarprops.previewBool ? <><div onClick={() => setExtent(sidebarprops.boundbox)}></div><MapContainer className='flex h-full w-full' bounds={sidebarprops.boundbox} zoom={13} scrollWheelZoom={true} attributionControl={false}>
+    <Recenter bounds={sidebarprops.boundbox}/>
   
     <TileLayer
       attribution={false}
@@ -36,7 +37,7 @@ export default function Map({center}) {
     />
     <GeoJSON data={son} style={setColor}/>
     
-  </MapContainer></> : <div>Click preview to show a file on the map</div>}
+  </MapContainer></> : <div className="flex items-center align-center w-full justify-center text-slate-400">Click Preview to show a file on the map</div>}
 </div>
     )
 }
